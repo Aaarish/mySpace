@@ -4,3 +4,8 @@ spring:
       host: localhost
       port: 27017
       database: my_space
+
+
+jwt:
+  secret:
+    key: secretsecretsecretsecretsecretsecretsecretsecretsecretsecretsecretsecretsecretsecretsecretsecretsecretsecretsecretsecretsecretsecretsecretsecretsecretsecretsecretsecretsecretsecretsecretsecret

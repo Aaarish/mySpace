@@ -1,4 +1,4 @@
-package com.example.mySpace.users;
+package com.example.mySpace.dto;
 
 import lombok.*;
 
@@ -7,8 +7,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class UserDto {
-    private String userId;
+public class RegisterRequest {
     private String firstName;
     private String lastName;
     private String email;
