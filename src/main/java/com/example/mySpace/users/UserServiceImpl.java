@@ -10,6 +10,8 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+import static com.example.mySpace.users.Role.NORMAL_USER;
+
 @Service
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService {
@@ -23,6 +25,7 @@ public class UserServiceImpl implements UserService {
 
         user.setUserId(UUID.randomUUID().toString());
         user.setPassword(passwordEncoder.encode(userDto.getPassword()));
+        user.setRole(NORMAL_USER);
 
         User savedUser = userRepo.save(user);
 
@@ -31,7 +34,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<UserDto> getUsers() {
-        List<User> users = userRepo.findAll();
+        List<User> users = userRepo.findAllByRole(NORMAL_USER.name());
 
         return users.stream()
                 .map(u -> modelMapper.map(u, UserDto.class))

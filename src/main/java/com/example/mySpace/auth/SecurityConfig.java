@@ -3,12 +3,17 @@ package com.example.mySpace.auth;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+
+import static com.example.mySpace.users.Permission.*;
+import static com.example.mySpace.users.Role.*;
 
 @Configuration
 @EnableWebSecurity
@@ -22,7 +27,19 @@ public class SecurityConfig {
         http
                 .csrf().disable()
                 .authorizeHttpRequests()
-                .antMatchers("/auth/**").permitAll()
+
+                .requestMatchers("/auth/**").permitAll()
+
+                .requestMatchers(HttpMethod.GET, "/users/**").hasAnyRole(NORMAL_USER.name(), ADMIN.name())
+                .requestMatchers(HttpMethod.POST, "/users/**").hasRole(ADMIN.name())
+                .requestMatchers(HttpMethod.PUT, "/users/**").hasRole(ADMIN.name())
+                .requestMatchers(HttpMethod.DELETE, "/users/**").hasRole(ADMIN.name())
+
+//                .requestMatchers(HttpMethod.GET, "/users/**").hasAnyAuthority(NORMAL_USER_READ.name(), ADMIN_READ.name())
+//                .requestMatchers(HttpMethod.PUT, "/users/**").hasAnyAuthority(NORMAL_USER_WRITE.name(), ADMIN_WRITE.name())
+//                .requestMatchers(HttpMethod.POST, "/users/**").hasAuthority(ADMIN_WRITE.name())
+//                .requestMatchers(HttpMethod.DELETE, "/users/**").hasAuthority(ADMIN_WRITE.name())
+
                 .anyRequest().authenticated()
                 .and()
                 .sessionManagement()
