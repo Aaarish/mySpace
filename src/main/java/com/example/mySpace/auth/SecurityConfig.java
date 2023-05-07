@@ -11,8 +11,6 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
-
-import static com.example.mySpace.users.Permission.*;
 import static com.example.mySpace.users.Role.*;
 
 @Configuration
@@ -34,11 +32,6 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.POST, "/users/**").hasRole(ADMIN.name())
                 .requestMatchers(HttpMethod.PUT, "/users/**").hasRole(ADMIN.name())
                 .requestMatchers(HttpMethod.DELETE, "/users/**").hasRole(ADMIN.name())
-
-//                .requestMatchers(HttpMethod.GET, "/users/**").hasAnyAuthority(NORMAL_USER_READ.name(), ADMIN_READ.name())
-//                .requestMatchers(HttpMethod.PUT, "/users/**").hasAnyAuthority(NORMAL_USER_WRITE.name(), ADMIN_WRITE.name())
-//                .requestMatchers(HttpMethod.POST, "/users/**").hasAuthority(ADMIN_WRITE.name())
-//                .requestMatchers(HttpMethod.DELETE, "/users/**").hasAuthority(ADMIN_WRITE.name())
 
                 .anyRequest().authenticated()
                 .and()

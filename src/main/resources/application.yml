@@ -6,6 +6,8 @@ spring:
       database: my_space
 
 
+
+
 jwt:
   secret:
     key: secretsecretsecretsecretsecretsecretsecretsecretsecretsecretsecretsecretsecretsecretsecretsecretsecretsecretsecretsecretsecretsecretsecretsecretsecretsecretsecretsecretsecretsecretsecretsecret
